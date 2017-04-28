@@ -1,0 +1,19 @@
+
+.menu {
+    margin-bottom: 30px;
+}
+
+#graph_display {
+    width: 100%;
+    height: 100%;
+
+    margin: 0px;
+
+    border: 1px solid black;
+}
+
+#resize {
+    float: right;
+    
+    margin: 10px;
+}
