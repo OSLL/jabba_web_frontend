@@ -24,10 +24,26 @@ Graphs
                     </div>
 
                     <div class="control-group">
-                        <label class="controls-label"> Rank direction </label>
+                        <label class="controls-label"> Graph type </label>
                         <div class="controls">
-                            <input type="radio" name="graph_type" value="call" checked> Call graph  </input>
-                            <input type="radio" name="graph_type" value="include"> Include graph </input>
+                            <input type="radio" name="graph_type" value="call" checked onclick="graphTypeChange(this);"> Call graph  </input>
+                            <input type="radio" name="graph_type" value="include" onclick="graphTypeChange(this);"> Include graph </input>
+                        </div>
+                    </div>
+
+                    <div id="call-graph-options">
+                        <div class="form-group">
+                            <label for="call_parameters"> Call parameters </label>
+                            <input class="form-control" type="text" id="call_parameters" placeholder="Call parameters"> 
+                        </div>
+
+                        <div class="control-group">
+                            <label class="controls-label"> Call display </label>
+                            <div class="controls">
+                                <input type="radio" name="call_display" value="none"> None </input>
+                                <input type="radio" name="call_display" value="text" checked> Text  </input>
+                                <input type="radio" name="call_display" value="edge"> Edge  </input>
+                            </div>
                         </div>
                     </div>
 

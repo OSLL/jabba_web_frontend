@@ -20,8 +20,8 @@ def api_graphs():
     files = request.args.get('files', '', type=str)
     rank_dir = request.args.get('rank_dir', 'left-right', type=str)
     legend = request.args.get('legend', '', type=str)
-
-    print(legend)
+    call_parameters = request.args.get('call_parameters', '', type=str)
+    call_display = request.args.get('call_display', 'none', type=str)
 
     graph = logic.build_graph(
             repository=repository, 
@@ -29,7 +29,9 @@ def api_graphs():
             graph_type = graph_type, 
             files=files, 
             rank_dir=rank_dir, 
-            legend=legend
+            legend=legend,
+            call_parameters=call_parameters,
+            call_display=call_display
             )
 
     return jsonify(graph=graph)
