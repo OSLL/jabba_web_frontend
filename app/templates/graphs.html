@@ -15,16 +15,42 @@ Graphs
             <div class="col-md-3">
                 <form id="form">
                     <div class="form-group">
-                        <input type="text" id="repository" placeholder="Repository"> 
+                        <label for="repository"> Repository </label>
+                        <input class="form-control" type="text" id="repository" placeholder="Repository"> 
                     </div>
                     <div class="form-group">
-                        <input type="text" id="yaml_root" placeholder="Yaml root"> 
+                        <label for="yaml_root"> Yaml root </label>
+                        <input class="form-control" type="text" id="yaml_root" placeholder="Yaml root"> 
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="graph" placeholder="Graph type"> 
+
+                    <div class="control-group">
+                        <label class="controls-label"> Rank direction </label>
+                        <div class="controls">
+                            <input type="radio" name="graph_type" value="call" checked> Call graph  </input>
+                            <input type="radio" name="graph_type" value="include"> Include graph </input>
+                        </div>
                     </div>
+
                     <div class="form-group">
-                        <input type="text" id="files" placeholder="Files"> 
+                        <label for="files"> Files </label>
+                        <input class="form-control" type="text" id="files" placeholder="Files"> 
+                    </div>
+
+                    <div class="control-group">
+                        <label class="controls-label"> Rank direction </label>
+                        <div class="controls">
+                            <input type="radio" name="rank_dir" value="left-right" checked> Left right </input>
+                            <input type="radio" name="rank_dir" value="up-down"> Up down  </input>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="controls-label"> 
+                            Legend
+                        </label>
+                        <div class="controls">
+                            <input type="checkbox" name="legend"> Add legend </input>
+                        </div>
                     </div>
 
                     <button class="btn btn-default" id="plot" type="submit"> Plot </button>

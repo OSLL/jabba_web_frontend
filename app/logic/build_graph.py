@@ -5,7 +5,7 @@ from subprocess import call
 
 from .git import download_repository
 
-def build_graph(repository, yaml_root, graph_type, files):
+def build_graph(repository, yaml_root, graph_type, files, rank_dir, legend):
     cwd = os.getcwd()
 
     path = download_repository(repository)
@@ -13,7 +13,15 @@ def build_graph(repository, yaml_root, graph_type, files):
 
     graph = '--include-graph' if graph_type == 'include' else '--call-graph'
 
-    call(['jabba', '--yaml-root={}'.format(yaml_root), graph, '--name=graph', '--verbose=2', '--files={}'.format(files)])
+    call(['jabba', 
+        '--yaml-root={}'.format(yaml_root), 
+        graph, 
+        '--name=graph', 
+        '--verbose=2', 
+        '--files={}'.format(files),
+        '--legend' if legend else '',
+        '--rank-dir={}'.format(rank_dir)
+        ])
 
     os.chdir(cwd)
 

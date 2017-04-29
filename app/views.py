@@ -18,7 +18,18 @@ def api_graphs():
     yaml_root = request.args.get('yaml_root', '', type=str)
     graph_type = request.args.get('graph', '', type=str)
     files = request.args.get('files', '', type=str)
+    rank_dir = request.args.get('rank_dir', 'left-right', type=str)
+    legend = request.args.get('legend', '', type=str)
 
-    graph = logic.build_graph(repository=repository, yaml_root=yaml_root, graph_type = graph_type, files=files)
+    print(legend)
+
+    graph = logic.build_graph(
+            repository=repository, 
+            yaml_root=yaml_root, 
+            graph_type = graph_type, 
+            files=files, 
+            rank_dir=rank_dir, 
+            legend=legend
+            )
 
     return jsonify(graph=graph)

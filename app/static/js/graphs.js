@@ -6,11 +6,16 @@ $(function(){
         var graph = $('#graph').val();
         var files = $('#files').val();
 
+        var rank_dir = $("input[name=rank_dir]:checked").val();
+        var legend = $("input[name=legend]").is(':checked');
+
         $.getJSON(SCRIPT_ROOT + '/api/graphs', {
             repository: repository,
             yaml_root: yaml_root,
             graph: graph,
-            files: files
+            files: files,
+            rank_dir: rank_dir,
+            legend: legend
         }, function(data){
             $('#graph_display').empty();
             $('#graph_display').append(data.graph);
