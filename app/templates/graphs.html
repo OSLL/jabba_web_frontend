@@ -12,7 +12,7 @@ Graphs
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" id="form-wrapper">
                 <form id="form">
                     <div class="form-group">
                         <label for="repository"> Repository </label>
@@ -72,8 +72,8 @@ Graphs
                     <button class="btn btn-default" id="plot" type="submit"> Plot </button>
                 </form>
             </div>
-            <div class="col-md-9">
-                <button class="btn btn-default" id="resize"><span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span></button>
+            <div class="col-md-9" id="graph-wrapper">
+                <button class="btn btn-default" id="resize" onclick="expandButton();"><span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span></button>
                 <div id="graph_display"></div>
             </div>
         </div>
