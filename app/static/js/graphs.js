@@ -9,6 +9,8 @@ $(function(){
         var rank_dir = $("input[name=rank_dir]:checked").val();
         var legend = $("input[name=legend]").is(':checked');
 
+        var update_repository = $('input[name=update-repository]').is(':checked');
+
         var call_display = $('input[name=call_display]:checked').val();
         var call_parameters = $('#call_parameters').val();
 
@@ -20,7 +22,8 @@ $(function(){
             rank_dir: rank_dir,
             legend: legend,
             call_display: call_display,
-            call_parameters: call_parameters
+            call_parameters: call_parameters,
+            update_repository
         }, function(data){
             $('#results').empty();
             $('#results').append(data.graph);

@@ -21,10 +21,12 @@ $(function(){
         var repository = $('#repository').val();
         var yaml_root = $('#yaml_root').val();
         var synonyms = $('#synonyms').val();
+        var update_repository = $('input[name=update-repository]').is(':checked');
 
         options.repository = repository;
         options.yaml_root = yaml_root;
         options.synonyms = synonyms;
+        options.update_repository = update_repository;
 
         $.getJSON(SCRIPT_ROOT + '/api/analysis', 
             options,

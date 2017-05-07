@@ -6,10 +6,10 @@ from subprocess import check_output, CalledProcessError
 
 from .git import download_repository
 
-def get_analysis_result(repository, yaml_root, synonyms, **kwargs):
+def get_analysis_result(repository, yaml_root, synonyms, update_repository='false', **kwargs):
     cwd = os.getcwd()
 
-    path = download_repository(repository)
+    path = download_repository(repository, update_repository)
     os.chdir(path)
 
     analysis_args = []
@@ -34,10 +34,10 @@ def get_analysis_result(repository, yaml_root, synonyms, **kwargs):
     # call doesn't accept '' as argument
     call_args = [arg for arg in call_args if arg != '']
 
+    # Analysis can return non-zero code
     try:
         result = check_output(call_args)
     except CalledProcessError as grepexc:
-        print(repr(grepexc))
         result = grepexc.output
 
     result = result.decode()
@@ -51,7 +51,6 @@ def get_analysis_result(repository, yaml_root, synonyms, **kwargs):
     prev_line = ''
 
     for line in result:
-        print(current_result)
         # If line after header
         if line.startswith('---'):
             if current_result['header'] == '':
