@@ -35,3 +35,16 @@ def api_graphs():
             )
 
     return jsonify(graph=graph)
+
+@app.route('/api/analysis')
+def api_analysis():
+    repository = request.args.get('repository', '', type=str)
+    yaml_root = request.args.get('yaml_root', '', type=str)
+    synonyms = request.args.get('synonyms', '', type=str)
+    depends_on = request.args.get('depends_on', '', type=str)
+    unused_configs = request.args.get('unused_configs', '', type=str)
+
+    analysis_result = logic.get_analysis_result(repository=repository, yaml_root=yaml_root, synonyms=synonyms, 
+            depends_on=depends_on, unused_configs=unused_configs)
+
+    return jsonify(result=analysis_result)
