@@ -1,6 +1,8 @@
 
 $(function(){
     $('#analyze').click(function(e){
+        addLoader();
+
         var inputs = $('input[name=analysis-checkbox]');
 
         var options = {};

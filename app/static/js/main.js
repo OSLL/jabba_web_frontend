@@ -16,3 +16,8 @@ function expandButton(){
         expanded = true;
     }
 }
+
+function addLoader(){
+    $('#results').empty();
+    $('#results').append('<div class="loader"></div>');
+}

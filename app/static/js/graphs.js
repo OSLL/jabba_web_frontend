@@ -1,6 +1,9 @@
 
 $(function(){
     $('#plot').click(function(e){
+
+        addLoader();
+
         var repository = $('#repository').val();
         var yaml_root = $('#yaml_root').val();
         var graph = $('input[name=graph_type]:checked').val();
