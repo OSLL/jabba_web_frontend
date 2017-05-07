@@ -30,7 +30,7 @@ $(function(){
             options,
             function(data){
                 var data = data.result;
-                $('#result-wrapper').empty();
+                $('#results').empty();
 
                 data.forEach(function(result){
                     result.body = result.body.replace(/\n+/g, '<br>');
@@ -42,7 +42,7 @@ $(function(){
                     panel.append(panelHeading);
                     panel.append(panelBody);
 
-                    $('#result-wrapper').append(panel);
+                    $('#results').append(panel);
                 });
             }
         );

@@ -22,10 +22,10 @@ $(function(){
             call_display: call_display,
             call_parameters: call_parameters
         }, function(data){
-            $('#graph_display').empty();
-            $('#graph_display').append(data.graph);
+            $('#results').empty();
+            $('#results').append(data.graph);
 
-            var svg = $('#graph_display').children()[0];
+            var svg = $('#results').children()[0];
 
             svg.setAttribute('width', '100%');
             svg.setAttribute('height', '80%');
