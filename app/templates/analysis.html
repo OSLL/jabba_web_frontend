@@ -11,21 +11,43 @@ Analysis
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <button type="submit" class="btn btn-default"> Analyze </button>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Cyclic dependencies
+            <div class="col-md-3" id="form-wrapper">
+                <form id="form">
+                    <div class="control-group">
+                        
+                        <div class="form-group">
+                            <label for="repository"> Repository </label>
+                            <input class="form-control" type="text" id="repository" placeholder="Repository"> 
+                        </div>
+
+                        <div class="form-group">
+                            <label for="yaml_root"> Yaml root </label>
+                            <input class="form-control" type="text" id="yaml_root" placeholder="Yaml root"> 
+                        </div>
+
+                        <div class="form-group">
+                            <label for="synonyms"> Synonyms </label>
+                            <input class="form-control" type="text" id="synonyms" placeholder="Synonyms"> 
+                        </div>
+
+                        <label class="controls-label"> 
+                            Analysis functions
+                        </label>
+                        <div class="controls">
+                            <label><input type="checkbox" name="analysis-checkbox" value="depends_on" onclick="toggleAnalysisFunction(this);"> Depends on </label>
+                        </div>
+                        <div class="controls">
+                            <label><input type="checkbox" name="analysis-checkbox" value="unused_configs" onclick="toggleAnalysisFunction(this);"> Unused configs  </label>
+                        </div>
                     </div>
 
-                    <div class="panel-body">
-                        OK
-                    </div>
-                </div>
+                    <div id="analysis-options"></div>
+
+                    <button type="submit" class="btn btn-default" id="analyze"> Analyze </button>
+                </form>
+            </div>
+
+            <div class="col-md-9" id="result-wrapper">
             </div>
         </div>
     </div>
