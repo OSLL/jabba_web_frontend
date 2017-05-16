@@ -89,7 +89,7 @@ analysisOptions = {
             class: 'form-group depends_on',
         });
 
-        wrapper.append('<label for="depends_on"> Depends on </label>');
+        wrapper.append('<label for="depends_on"> <a href="https://github.com/OSLL/jabba/wiki/Analysis#what-depends-on-this-config"> Depends on </a> </label>');
         wrapper.append('<input class="form-control" type="text" id="depends_on" placeholder="Configs" name="analysis-input">');
 
         return wrapper;
@@ -100,8 +100,8 @@ analysisOptions = {
             class: 'form-group unused_configs',
         });
 
-        wrapper.append("<label> Unused configs </label><br>");
-        wrapper.append("<span>No additional options</span>");
+        wrapper.append('<label> <a href="https://github.com/OSLL/jabba/wiki/Analysis#unused-configs"> Unused configs </a> </label><br>');
+        wrapper.append('<span>No additional options</span>');
 
         return wrapper;
     },
@@ -111,7 +111,7 @@ analysisOptions = {
             class: 'form-group parameters_present',
         });
 
-        wrapper.append('<label> Missing call parameters </label>');
+        wrapper.append('<label> <a href="https://github.com/OSLL/jabba/wiki/Analysis#missing-call-parameters"> Missing call parameters </a> </label>');
         wrapper.append('<input class="form-control" type="text" id="parameters_present" placeholder="Parameters" name="analysis-input">');
 
         return wrapper;
@@ -122,7 +122,7 @@ analysisOptions = {
             class: 'form-group cyclic_deps'
         });
 
-        wrapper.append('<label> Cyclic dependencies </label><br>');
+        wrapper.append('<label> <a href="https://github.com/OSLL/jabba/wiki/Analysis#cyclic-dependencies"> Cyclic dependencies </a> </label><br>');
         wrapper.append("<span>No additional options</span>");
 
         return wrapper;
