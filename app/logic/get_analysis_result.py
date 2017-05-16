@@ -6,10 +6,10 @@ from subprocess import check_output, CalledProcessError
 
 from .git import download_repository
 
-def get_analysis_result(repository, yaml_root, synonyms, **kwargs):
+def get_analysis_result(repository, yaml_root, synonyms, update_repository='false', **kwargs):
     cwd = os.getcwd()
 
-    path = download_repository(repository)
+    path = download_repository(repository, update_repository)
     os.chdir(path)
 
     analysis_args = []
@@ -22,53 +22,25 @@ def get_analysis_result(repository, yaml_root, synonyms, **kwargs):
 
         analysis_args.append(s)
 
-    call_args = ['jabba', 
-        '--yaml-root={}'.format(yaml_root), 
-        '--synonyms={}'.format(synonyms) if synonyms else '',
-        '--verbose=0', 
-        '--analysis', 
-        ]
+    results = []
 
-    call_args.extend(analysis_args)
+    analyzer = Analyzer(root=yaml_root, arguments=analysis_args, synonyms=synonyms, verbose=2)
 
-    # call doesn't accept '' as argument
-    call_args = [arg for arg in call_args if arg != '']
+    analyzer.run()
 
-    try:
-        result = check_output(call_args)
-    except CalledProcessError as grepexc:
-        print(repr(grepexc))
-        result = grepexc.output
+    for result in analyzer.results:
 
-    result = result.decode()
+        # result.results may contain usefull info even if result.is_ok() is True
+        if result.is_ok() and len(result.results) == 0:
+            body = 'OK'
+        else:
+            body = '\n'.join(map(str, result.results))
 
-    result = result.split('\n')
+        results.append({
+            'header': result.header,
+            'body': body
+        })
 
     os.chdir(cwd)
-
-    results = []
-    current_result = {'header': '', 'body': ''}
-    prev_line = ''
-
-    for line in result:
-        print(current_result)
-        # If line after header
-        if line.startswith('---'):
-            if current_result['header'] == '':
-                current_result['header'] = prev_line
-                continue
-
-            results.append(current_result)
-
-            current_result = {
-                    'header': prev_line,
-                    'body': ''
-            }
-        elif current_result['header'] != '':
-                current_result['body'] += line + '\n'
-
-        prev_line = line
-
-    results.append(current_result)
 
     return results

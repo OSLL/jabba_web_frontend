@@ -39,15 +39,34 @@ Analysis
                         <div class="controls">
                             <label><input type="checkbox" name="analysis-checkbox" value="unused_configs" onclick="toggleAnalysisFunction(this);"> Unused configs  </label>
                         </div>
+                        <div class="controls">
+                            <label><input type="checkbox" name="analysis-checkbox" value="parameters_present" onclick="toggleAnalysisFunction(this);"> Missing parameters  </label>
+                        </div>
+                        <div class="controls">
+                            <label><input type="checkbox" name="analysis-checkbox" value="cyclic_deps" onclick="toggleAnalysisFunction(this);"> Cyclic dependencies  </label>
+                        </div>
                     </div>
 
                     <div id="analysis-options"></div>
+                    
+                    <div class="control-group">
+                        <label class="controls-label"> 
+                            Update repository
+                        </label>
+                        <div class="controls">
+                            <input type="checkbox" name="update-repository"> Update repository </input>
+                        </div>
+                    </div>
+
+
 
                     <button type="submit" class="btn btn-default" id="analyze"> Analyze </button>
                 </form>
             </div>
 
             <div class="col-md-9" id="result-wrapper">
+                <button class="btn btn-default" id="resize" onclick="expandButton();"><span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span></button>
+                <div id="results"></div>
             </div>
         </div>
     </div>

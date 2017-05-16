@@ -1,6 +1,8 @@
 
 $(function(){
     $('#analyze').click(function(e){
+        addLoader();
+
         var inputs = $('input[name=analysis-checkbox]');
 
         var options = {};
@@ -21,16 +23,20 @@ $(function(){
         var repository = $('#repository').val();
         var yaml_root = $('#yaml_root').val();
         var synonyms = $('#synonyms').val();
+        var update_repository = $('input[name=update-repository]').is(':checked');
 
         options.repository = repository;
         options.yaml_root = yaml_root;
         options.synonyms = synonyms;
+        options.update_repository = update_repository;
+
+        console.log(options);
 
         $.getJSON(SCRIPT_ROOT + '/api/analysis', 
             options,
             function(data){
                 var data = data.result;
-                $('#result-wrapper').empty();
+                $('#results').empty();
 
                 data.forEach(function(result){
                     result.body = result.body.replace(/\n+/g, '<br>');
@@ -42,7 +48,7 @@ $(function(){
                     panel.append(panelHeading);
                     panel.append(panelBody);
 
-                    $('#result-wrapper').append(panel);
+                    $('#results').append(panel);
                 });
             }
         );
@@ -57,6 +63,8 @@ $(function(){
 
 function toggleAnalysisFunction(input){
     input = $(input);
+
+    console.log(input.val());
     
     if(input.is(':checked')){
         createAnalysisOptions(input.val());
@@ -78,8 +86,7 @@ function createAnalysisOptions(name){
 analysisOptions = {
     'depends_on': function(){
         var wrapper = $('<div>', {
-            class: 'form-group',
-            id: 'dependsOn'
+            class: 'form-group depends_on',
         });
 
         wrapper.append('<label for="depends_on"> Depends on </label>');
@@ -90,11 +97,32 @@ analysisOptions = {
 
     'unused_configs': function(){
         var wrapper = $('<div>', {
-            class: 'form-group',
-            id: 'unusedConfigs'
+            class: 'form-group unused_configs',
         });
 
         wrapper.append("<label> Unused configs </label><br>");
+        wrapper.append("<span>No additional options</span>");
+
+        return wrapper;
+    },
+
+    'parameters_present': function(){
+        var wrapper = $('<div>', {
+            class: 'form-group parameters_present',
+        });
+
+        wrapper.append('<label> Missing call parameters </label>');
+        wrapper.append('<input class="form-control" type="text" id="parameters_present" placeholder="Parameters" name="analysis-input">');
+
+        return wrapper;
+    },
+
+    'cyclic_deps': function(){
+        var wrapper = $('<div>', {
+            class: 'form-group cyclic_deps'
+        });
+
+        wrapper.append('<label> Cyclic dependencies </label><br>');
         wrapper.append("<span>No additional options</span>");
 
         return wrapper;
@@ -102,5 +130,5 @@ analysisOptions = {
 };
 
 function removeAnalysisOptions(name){
-    $('#' + name).remove();
+    $('.' + name).remove();
 }

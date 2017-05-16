@@ -4,13 +4,16 @@ import shutil
 
 import git
 
-def download_repository(repository):
+def download_repository(repository, update_repository):
 
     name = get_name(repository)
     path = "tmp/{}".format(name)
 
     if os.path.exists(path):
-        shutil.rmtree(path)
+        if update_repository == 'true':
+            shutil.rmtree(path)
+        else:
+            return path
 
     git.Git().clone(repository, path)
 

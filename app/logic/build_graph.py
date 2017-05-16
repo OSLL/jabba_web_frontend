@@ -5,10 +5,10 @@ from subprocess import call
 
 from .git import download_repository
 
-def build_graph(repository, yaml_root, graph_type, files, rank_dir, legend=False, call_parameters='', call_display='none'):
+def build_graph(repository, yaml_root, graph_type, files, rank_dir, legend=False, call_parameters='', call_display='none', update_repository='false'):
     cwd = os.getcwd()
 
-    path = download_repository(repository)
+    path = download_repository(repository, update_repository)
     os.chdir(path)
 
     graph = '--include-graph' if graph_type == 'include' else '--call-graph'

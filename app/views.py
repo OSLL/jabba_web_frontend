@@ -22,6 +22,7 @@ def api_graphs():
     legend = request.args.get('legend', '', type=str)
     call_parameters = request.args.get('call_parameters', '', type=str)
     call_display = request.args.get('call_display', 'none', type=str)
+    update_repository = request.args.get('update_repository', 'false', type=str)
 
     graph = logic.build_graph(
             repository=repository, 
@@ -31,7 +32,8 @@ def api_graphs():
             rank_dir=rank_dir, 
             legend=legend,
             call_parameters=call_parameters,
-            call_display=call_display
+            call_display=call_display,
+            update_repository=update_repository
             )
 
     return jsonify(graph=graph)
@@ -43,8 +45,12 @@ def api_analysis():
     synonyms = request.args.get('synonyms', '', type=str)
     depends_on = request.args.get('depends_on', '', type=str)
     unused_configs = request.args.get('unused_configs', '', type=str)
+    update_repository = request.args.get('update_repository', 'false', type=str)
+    parameters_present = request.args.get('parameters_present', '', type=str)
+    cyclic_deps = request.args.get('cyclic_deps', 'false', type=str)
 
     analysis_result = logic.get_analysis_result(repository=repository, yaml_root=yaml_root, synonyms=synonyms, 
-            depends_on=depends_on, unused_configs=unused_configs)
+            depends_on=depends_on, unused_configs=unused_configs, update_repository=update_repository, 
+            parameters_present=parameters_present, cyclic_deps=cyclic_deps)
 
     return jsonify(result=analysis_result)
