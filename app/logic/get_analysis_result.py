@@ -38,7 +38,9 @@ def get_analysis_result(repository, yaml_root, synonyms, update_repository='fals
 
         results.append({
             'header': result.header,
-            'body': body
+            'body': body,
+            'ok': result.is_ok(),
+            'errors_num': len(result.results)
         })
 
     os.chdir(cwd)
