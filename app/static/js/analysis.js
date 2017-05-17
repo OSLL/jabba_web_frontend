@@ -37,7 +37,7 @@ $(function(){
                 $('#results').empty();
 
                 // Sort results such that failed ones come first
-                data.sort(function(r1, r2){
+                data.sort(function byOk(r1, r2){
                     r1 = r1.ok;
                     r2 = r2.ok;
 
@@ -64,6 +64,10 @@ $(function(){
                     var panelHeading = $('<div class="panel-heading">' + result.header + headerErrors + '</div>');
                     var panelBody = $('<div class="panel-body">' + result.body + '</div>');
 
+                    panelHeading.click(onPanelHeadingClick);
+
+                    panelBody.hide();
+
                     panel.append(panelHeading);
                     panel.append(panelBody);
 
@@ -72,6 +76,12 @@ $(function(){
             }
         );
     });
+
+    function onPanelHeadingClick(){
+        var parent = $(this).parent();
+
+        parent.find(".panel-body").toggle();
+    }
 
     // Don't submit the form
     $('#form').submit(function(e){
