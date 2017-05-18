@@ -22,6 +22,7 @@ $(function(){
 
         var repository = $('#repository').val();
         var yaml_root = $('#yaml_root').val();
+        var checkout_target = $('#checkout_target').val();
         var synonyms = $('#synonyms').val();
         var update_repository = $('input[name=update-repository]').is(':checked');
 
@@ -29,6 +30,7 @@ $(function(){
         options.yaml_root = yaml_root;
         options.synonyms = synonyms;
         options.update_repository = update_repository;
+        options.checkout_target = checkout_target;
 
         console.log(options);
 

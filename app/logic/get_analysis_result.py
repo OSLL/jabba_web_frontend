@@ -6,10 +6,10 @@ from subprocess import check_output, CalledProcessError
 
 from .git import download_repository
 
-def get_analysis_result(repository, yaml_root, synonyms, update_repository='false', **kwargs):
+def get_analysis_result(repository, yaml_root, synonyms, checkout_target='master', update_repository='false', **kwargs):
     cwd = os.getcwd()
 
-    path = download_repository(repository, update_repository)
+    path = download_repository(repository, update_repository=update_repository, checkout_target=checkout_target)
     os.chdir(path)
 
     analysis_args = []

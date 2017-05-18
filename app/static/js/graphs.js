@@ -17,6 +17,8 @@ $(function(){
         var call_display = $('input[name=call_display]:checked').val();
         var call_parameters = $('#call_parameters').val();
 
+        var checkout_target = $('#checkout_target').val();
+
         $.getJSON(SCRIPT_ROOT + '/api/graphs', {
             repository: repository,
             yaml_root: yaml_root,
@@ -26,7 +28,8 @@ $(function(){
             legend: legend,
             call_display: call_display,
             call_parameters: call_parameters,
-            update_repository
+            update_repository: update_repository,
+            checkout_target: checkout_target
         }, function(data){
             $('#results').empty();
             $('#results').append(data.graph);
