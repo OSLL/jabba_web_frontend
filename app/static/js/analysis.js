@@ -32,8 +32,6 @@ $(function(){
         options.update_repository = update_repository;
         options.checkout_target = checkout_target;
 
-        console.log(options);
-
         $.getJSON(SCRIPT_ROOT + '/api/analysis', 
             options,
             function(data){
@@ -66,8 +64,6 @@ $(function(){
 function toggleAnalysisFunction(input){
     input = $(input);
 
-    console.log(input.val());
-    
     if(input.is(':checked')){
         createAnalysisOptions(input.val());
     } else {
@@ -133,4 +129,24 @@ analysisOptions = {
 
 function removeAnalysisOptions(name){
     $('.' + name).remove();
+}
+
+function fillInExample(){
+    if(!confirm("This action will clear the form and fill in example data. Do you wish to proceed?")){
+        return;
+    }
+
+    $('#repository').val('github.com/mariadb-corporation/maxscale-jenkins-jobs');
+    $('#yaml_root').val('maxscale_jobs');
+    $('#synonyms').val("{same-node, node-parameters}");
+
+    var inputs = $('input[name=analysis-checkbox]');
+
+    inputs.each(function(index, input){
+        input = $(input);
+        input.click();
+    });
+
+    $("#depends_on").val("maxscale_jobs/include/slave.yaml");
+    $("#parameters_present").val("same-node");
 }

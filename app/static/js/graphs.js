@@ -55,3 +55,15 @@ function graphTypeChange(el){
         $('#call-graph-options').hide();
     }
 }
+
+function fillInExample(){
+    if(!confirm("This action will clear the form and fill in example data. Do you wish to proceed?")){
+        return;
+    }
+
+    $('#repository').val('github.com/mariadb-corporation/maxscale-jenkins-jobs');
+    $('#yaml_root').val('maxscale_jobs');
+    $('#call_parameters').val("same-node");
+    $('#files').val("maxscale_jobs/build_all.yaml");
+    $("input[name=legend]").click();
+}
