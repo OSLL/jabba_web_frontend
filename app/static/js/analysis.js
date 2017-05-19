@@ -144,7 +144,10 @@ function fillInExample(){
 
     inputs.each(function(index, input){
         input = $(input);
-        input.click();
+
+        if(!input.is(":checked")){
+            input.click();
+        }
     });
 
     $("#depends_on").val("maxscale_jobs/include/slave.yaml");
