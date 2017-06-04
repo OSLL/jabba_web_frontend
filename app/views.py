@@ -23,6 +23,7 @@ def api_graphs():
     call_parameters = request.args.get('call_parameters', '', type=str)
     call_display = request.args.get('call_display', 'none', type=str)
     update_repository = request.args.get('update_repository', 'false', type=str)
+    checkout_target = request.args.get('checkout_target', 'master', type=str)
 
     graph = logic.build_graph(
             repository=repository, 
@@ -33,7 +34,8 @@ def api_graphs():
             legend=legend,
             call_parameters=call_parameters,
             call_display=call_display,
-            update_repository=update_repository
+            update_repository=update_repository,
+            checkout_target=checkout_target
             )
 
     return jsonify(graph=graph)
@@ -48,9 +50,10 @@ def api_analysis():
     update_repository = request.args.get('update_repository', 'false', type=str)
     parameters_present = request.args.get('parameters_present', '', type=str)
     cyclic_deps = request.args.get('cyclic_deps', '', type=str)
+    checkout_target = request.args.get('checkout_target', 'master', type=str)
 
     analysis_result = logic.get_analysis_result(repository=repository, yaml_root=yaml_root, synonyms=synonyms, 
             depends_on=depends_on, unused_configs=unused_configs, update_repository=update_repository, 
-            parameters_present=parameters_present, cyclic_deps=cyclic_deps)
+            parameters_present=parameters_present, cyclic_deps=cyclic_deps, checkout_target=checkout_target)
 
     return jsonify(result=analysis_result)
