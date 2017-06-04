@@ -161,3 +161,26 @@ analysisOptions = {
 function removeAnalysisOptions(name){
     $('.' + name).remove();
 }
+
+function fillInExample(){
+    if(!confirm("This action will clear the form and fill in example data. Do you wish to proceed?")){
+        return;
+    }
+
+    $('#repository').val('github.com/mariadb-corporation/maxscale-jenkins-jobs');
+    $('#yaml_root').val('maxscale_jobs');
+    $('#synonyms').val("{same-node, node-parameters}");
+
+    var inputs = $('input[name=analysis-checkbox]');
+
+    inputs.each(function(index, input){
+        input = $(input);
+
+        if(!input.is(":checked")){
+            input.click();
+        }
+    });
+
+    $("#depends_on").val("maxscale_jobs/include/slave.yaml");
+    $("#parameters_present").val("same-node");
+}

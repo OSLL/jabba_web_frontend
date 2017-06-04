@@ -3,6 +3,11 @@ body {
     margin: 5px;
 }
 
+#form-wrapper .btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .menu {
     margin-bottom: 30px;
 }
