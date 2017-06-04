@@ -30,19 +30,38 @@ $(function(){
         options.synonyms = synonyms;
         options.update_repository = update_repository;
 
-        console.log(options);
-
         $.getJSON(SCRIPT_ROOT + '/api/analysis', 
             options,
             function(data){
                 var data = data.result;
                 $('#results').empty();
 
+                // Sort results such that failed ones come first
+                data.sort(function(r1, r2){
+                    r1 = r1.ok;
+                    r2 = r2.ok;
+
+                    if(r1 && !r2){
+                        return 1;
+                    }
+
+                    if(r2 && !r1){
+                        return -1;
+                    }
+
+                    return 0;
+                });
+
                 data.forEach(function(result){
                     result.body = result.body.replace(/\n+/g, '<br>');
 
-                    var panel = $('<div class="panel panel-default"></div>');
-                    var panelHeading = $('<div class="panel-heading">' + result.header + '</div>');
+                    var panelStyle = result.ok ? 'panel-success' : 'panel-danger';
+
+                    var errorNums = '. ' + result.errors_num + (result.errors_num == 1 ? 'error' : ' errors');
+                    var headerErrors = result.ok ? '' : errorNums;
+
+                    var panel = $('<div class="panel ' + panelStyle + '"></div>');
+                    var panelHeading = $('<div class="panel-heading">' + result.header + headerErrors + '</div>');
                     var panelBody = $('<div class="panel-body">' + result.body + '</div>');
 
                     panel.append(panelHeading);
@@ -64,8 +83,6 @@ $(function(){
 function toggleAnalysisFunction(input){
     input = $(input);
 
-    console.log(input.val());
-    
     if(input.is(':checked')){
         createAnalysisOptions(input.val());
     } else {
