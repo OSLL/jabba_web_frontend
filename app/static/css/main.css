@@ -20,6 +20,10 @@ body {
     margin-top:50px;
 }
 
+#results .panel-heading {
+    cursor: pointer;
+}
+
 #results .panel {
     margin: 10px;
 }
